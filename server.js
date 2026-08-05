@@ -7,6 +7,11 @@ import jwt from 'jsonwebtoken';
 import db from './db.js';
 import nodemailer from 'nodemailer';
 import cron from 'node-cron';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -291,6 +296,14 @@ app.post('/api/trigger-alert', async (req, res) => {
     console.error('Error sending email:', error);
     res.status(500).json({ error: 'Failed to send email' });
   }
+});
+
+// Serve static frontend files (Monolithic Deployment)
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Catch-all route to serve React's index.html for client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {

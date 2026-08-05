@@ -3,9 +3,9 @@ import axios from 'axios';
 // ==========================================
 // API Configuration
 // ==========================================
-// Vercel 部署時，如果透過 vercel.json rewrite，可以用 '/api'
-// 為了本機與雲端共用，建議使用環境變數或直接指定 Render 網址
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Render 部署時，前後端同源，因此生產環境使用相對路徑 '/api'
+// 本機開發時，則指向 5000 Port
+export const API_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5000/api';
 
 // Transform SerpApi Google Flights response to our frontend format
 const transformFlight = (flightData, isReturn = false, originCode, destCode, dateStr) => {
