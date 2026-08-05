@@ -374,8 +374,9 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           </div>
         )}
       </div>
+    </div>
       
-      <ItineraryModal 
+    <ItineraryModal 
         isOpen={isItineraryOpen} 
         onClose={() => setIsItineraryOpen(false)} 
         destination={currentSearch?.destination}
