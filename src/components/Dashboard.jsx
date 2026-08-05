@@ -23,7 +23,7 @@ import SeatMap from './SeatMap';
 import { useCurrency } from '../context/CurrencyContext';
 import { getAircraftAnalysis, getRecommendations, getProviderPrices, generatePriceData, generatePriceMatrix } from '../services/mockData';
 import { fetchRealFlights, fetchAccountInfo, syncData } from '../services/api';
-import { Bell, Users, Map, CreditCard, Heart, UserCircle, Database, LogIn, LogOut, Shield, Globe, Plane, CheckCircle } from 'lucide-react';
+import { Bell, Users, Map, CreditCard, Heart, UserCircle, Database, LogIn, LogOut, Shield, Globe, Plane, CheckCircle, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FlightStatusModal from './FlightStatusModal';
 import CheckInModal from './CheckInModal';
