@@ -1,10 +1,18 @@
 .app-container {
-  max-width: 1200px;
+  max-width: 1600px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
 }
 
 .app-header {
@@ -33,9 +41,17 @@
   width: 100%;
 }
 
+/* Tablet & standard laptop */
 @media (min-width: 1024px) {
   .main-dashboard {
-    grid-template-columns: 1.8fr 1fr;
+    grid-template-columns: 1.6fr 1fr;
+  }
+}
+
+/* Ultra wide screen */
+@media (min-width: 1440px) {
+  .main-dashboard {
+    grid-template-columns: 2.2fr 1fr;
   }
 }
 
@@ -45,6 +61,13 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    padding: 1rem;
+    gap: 1rem;
+  }
 }
 
 .search-form h2 {
@@ -96,6 +119,27 @@
   color: var(--text-primary);
   font-size: 1rem;
   transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cascading-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .cascading-grid {
+    grid-template-columns: 1fr 1fr 1.5fr;
+  }
+  .schedule-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .input-with-icon input:focus,
@@ -852,9 +896,9 @@
   color: white;
 }
 
-/* --- Ticket Class Switcher --- */
 .ticket-class-switcher {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   padding: 0.5rem;
   border-radius: 12px;
