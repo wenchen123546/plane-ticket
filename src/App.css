@@ -27,15 +27,12 @@
 }
 
 .main-dashboard {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-}
-
-@media (min-width: 992px) {
-  .main-dashboard {
-    grid-template-columns: 350px 1fr;
-  }
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* --- FlightSearch Component --- */
@@ -821,9 +818,10 @@
 
 .header-nav {
   display: flex;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .nav-btn {
