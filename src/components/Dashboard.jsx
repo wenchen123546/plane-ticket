@@ -28,7 +28,7 @@ import { useTranslation } from 'react-i18next';
 import FlightStatusModal from './FlightStatusModal';
 import CheckInModal from './CheckInModal';
 
-export default function Dashboard() {
+export default function Dashboard({ savedFlights, setSavedFlights, currentUser, accountInfo }) {
   const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   
@@ -53,11 +53,7 @@ export default function Dashboard() {
   const [isGroupVoteOpen, setIsGroupVoteOpen] = useState(false);
   const [isSeatMapOpen, setIsSeatMapOpen] = useState(false);
   const [isVIPOpen, setIsVIPOpen] = useState(false);
-  const [savedFlights, setSavedFlights] = useState([]);
-  const [accountInfo, setAccountInfo] = useState(null);
-  const [isPassengerProfileOpen, setIsPassengerProfileOpen] = useState(false);
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [isVIPOpen, setIsVIPOpen] = useState(false);
   const [showSubscribeModal, setShowSubscribeModal] = useState(false);
   const [subscribeEmail, setSubscribeEmail] = useState('');
   const [subscribeTargetPrice, setSubscribeTargetPrice] = useState(10000);
@@ -66,13 +62,7 @@ export default function Dashboard() {
   const [statusFlightNum, setStatusFlightNum] = useState(null);
   const [checkInFlightNum, setCheckInFlightNum] = useState(null);
 
-  const loadAccountInfo = () => {
-    fetchAccountInfo().then(data => {
-      if (data && !data.error) {
-        setAccountInfo(data);
-      }
-    });
-  };
+  // (Moved loadAccountInfo to App.jsx)
 
   // Load saved flights on mount
   useEffect(() => {
@@ -199,104 +189,10 @@ export default function Dashboard() {
 
   const currentMultiplier = getClassMultiplier(ticketClass);
 
-  const handleLogout = () => {
-    localStorage.removeItem('nexus_token');
-    localStorage.removeItem('nexus_user');
-    setCurrentUser(null);
-  };
+  // (Moved handleLogout to App.jsx)
 
   return (
-    <div className="main-dashboard">
-      <div className="dashboard-sidebar">
-        <div className="logo-section">
-          <h2>Nexus <span className="highlight">Flight</span></h2>
-          <span className="badge">PRO</span>
-        </div>
-
-        {/* Global Settings (i18n & Currency) */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-            <Globe size={18} color="var(--accent-primary)" />
-            <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>{t('language')} & {t('currency')}</span>
-          </div>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <select 
-              value={i18n.language} 
-              onChange={(e) => i18n.changeLanguage(e.target.value)}
-              style={{ flex: 1, padding: '0.5rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '4px' }}
-            >
-              <option value="zh-TW">繁體中文</option>
-              <option value="en">English</option>
-            </select>
-            <select 
-              value={currency} 
-              onChange={(e) => setCurrency(e.target.value)}
-              style={{ flex: 1, padding: '0.5rem', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', borderRadius: '4px' }}
-            >
-              <option value="TWD">TWD</option>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-              <option value="JPY">JPY</option>
-            </select>
-          </div>
-        </div>
-        
-        {accountInfo && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: '1rem', padding: '0.75rem', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid var(--accent-primary)', borderRadius: '8px', color: 'var(--text-primary)', fontSize: '0.85rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Database size={16} color="var(--accent-primary)" />
-              <span>{t('free_search_quota') || '免費額度'}: </span>
-              <span style={{ fontWeight: 'bold', color: 'var(--accent-primary)' }}>{accountInfo.plan_searches_left} / {accountInfo.searches_per_month || '100'}</span>
-            </div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', marginLeft: '1.5rem' }}>
-              {t('reset_date') || '重置日期'} {accountInfo.plan_renewal_date}
-            </div>
-          </div>
-        )}
-
-        {/* Cloud Account Section */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
-          {currentUser ? (
-            <>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#10b981' }}>
-                  <UserCircle size={18} />
-                  <span style={{ fontWeight: 'bold' }}>{currentUser}</span>
-                </div>
-                <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
-                  <LogOut size={14} /> {t('logout') || '登出'}
-                </button>
-              </div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{t('cloud_sync_enabled') || '雲端同步已啟用'}</span>
-            </>
-          ) : (
-            <>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
-                <Shield size={18} />
-                <span style={{ fontSize: '0.85rem' }}>{t('not_logged_in')}</span>
-              </div>
-              <button onClick={() => setIsLoginModalOpen(true)} className="search-btn" style={{ margin: '0.5rem 0 0 0', padding: '0.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
-                <LogIn size={16} /> {t('login_register')}
-              </button>
-            </>
-          )}
-        </div>
-
-        <nav className="sidebar-nav">
-          <ul>
-            <li className="active"><Map size={20} /> {t('search_flights')}</li>
-            <li><CreditCard size={20} /> {t('book_flights')}</li>
-            <li style={{ cursor: 'pointer' }}>
-              <Heart size={20} /> {t('saved_flights')}
-              {savedFlights.length > 0 && <span className="nav-badge">{savedFlights.length}</span>}
-            </li>
-            <li onClick={() => setIsPassengerProfileOpen(true)} style={{ cursor: 'pointer' }}>
-              <Users size={20} /> {t('my_passport')}
-            </li>
-          </ul>
-        </nav>
-      </div>
-
+    <div className="main-dashboard" style={{ gridTemplateColumns: '1fr' }}>
       <div className="dashboard-content">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
           <div>
@@ -561,23 +457,7 @@ export default function Dashboard() {
         </div>
       )}
       
-      {isLoginModalOpen && (
-        <LoginModal 
-          isOpen={isLoginModalOpen} 
-          onClose={() => setIsLoginModalOpen(false)}
-          onLoginSuccess={(username) => {
-            setCurrentUser(username);
-            loadAccountInfo();
-          }}
-        />
-      )}
-      
-      {isPassengerProfileOpen && (
-        <PassengerProfile 
-          isOpen={isPassengerProfileOpen}
-          onClose={() => setIsPassengerProfileOpen(false)}
-        />
-      )}
+
 
       {statusFlightNum && (
         <FlightStatusModal flightNum={statusFlightNum} onClose={() => setStatusFlightNum(null)} />
