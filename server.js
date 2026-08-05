@@ -302,8 +302,8 @@ app.post('/api/trigger-alert', async (req, res) => {
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Catch-all route to serve React's index.html for client-side routing
-// Using '/*' instead of '*' to support Express 5 / path-to-regexp strictness
-app.get('/*', (req, res) => {
+// Express 5 嚴格要求萬用字元必須有變數名稱，所以改用 app.use 作為最終兜底路由
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
