@@ -13,18 +13,6 @@ const transformFlight = (flightData, isReturn = false, originCode, destCode, dat
   const stops = flightData.flights.length - 1;
   const durationHours = Math.floor(flightData.total_duration / 60) || 0;
   const durationMins = (flightData.total_duration % 60) || 0;
-
-export const fetchFlightStatus = async (flightNum) => {
-  try {
-    const response = await axios.get(`${API_URL}/flight-status/${flightNum}`);
-    return response.data;
-  } catch (error) {
-    if (error.response && error.response.data && error.response.data.error) {
-      throw new Error(error.response.data.error);
-    }
-    throw new Error('無法連線到即時航班伺服器');
-  }
-};
   // Calculate Layover Duration
   let isLongLayover = false;
   if (stops > 0 && flightData.layovers && flightData.layovers.length > 0) {
@@ -197,5 +185,17 @@ export const getUserData = async () => {
     return await res.json();
   } catch (error) {
     return null;
+  }
+};
+
+export const fetchFlightStatus = async (flightNum) => {
+  try {
+    const response = await axios.get(`${API_URL}/flight-status/${flightNum}`);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.error) {
+      throw new Error(error.response.data.error);
+    }
+    throw new Error('無法連線到即時航班伺服器');
   }
 };
