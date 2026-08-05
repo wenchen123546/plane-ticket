@@ -53,7 +53,6 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
   const [isGroupVoteOpen, setIsGroupVoteOpen] = useState(false);
   const [isSeatMapOpen, setIsSeatMapOpen] = useState(false);
   const [isVIPOpen, setIsVIPOpen] = useState(false);
-  const [isVIPOpen, setIsVIPOpen] = useState(false);
   const [showSubscribeModal, setShowSubscribeModal] = useState(false);
   const [subscribeEmail, setSubscribeEmail] = useState('');
   const [subscribeTargetPrice, setSubscribeTargetPrice] = useState(10000);
