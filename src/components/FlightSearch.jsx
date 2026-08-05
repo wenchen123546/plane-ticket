@@ -295,6 +295,7 @@ export default function FlightSearch({ onSearch }) {
               </div>
             ) : (
               // One-way / Round-trip Mode (Cascading)
+              <>
           <div className="cascading-grid">
             {/* Origin Cascading */}
             <div className="form-group">
