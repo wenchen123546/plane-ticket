@@ -376,9 +376,7 @@ export default function Dashboard() {
             <PriceChart data={priceData} />
           </div>
         )}
-      </div>
-      
-      <div className="dashboard-content">
+
         {loading ? (
           <div className="glass-panel" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
             搜尋符合條件的航班中...
