@@ -184,18 +184,19 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
   // (Moved handleLogout to App.jsx)
 
   return (
-    <div className="main-dashboard">
-      <div className="dashboard-content left-column">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
-          <div>
-            <h1 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              {t('search_flights')} <Sparkles className="icon-pulse" color="var(--accent-primary)" />
-            </h1>
-            <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Find your next cyberpunk destination</p>
-          </div>
-          <WeatherPanel />
+    <>
+      <div className="dashboard-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div>
+          <h1 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            {t('search_flights')} <Sparkles className="icon-pulse" color="var(--accent-primary)" />
+          </h1>
+          <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Find your next cyberpunk destination</p>
         </div>
-        <FlightSearch onSearch={handleSearch} />
+      </div>
+
+      <div className="main-dashboard">
+        <div className="dashboard-content left-column">
+          <FlightSearch onSearch={handleSearch} />
         
         {!loading && savedFlights.length > 0 && (
           <div style={{ marginTop: '2rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1.25rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
@@ -358,11 +359,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           </div>
         )}
 
-        {!loading && currentSearch?.destination && (
-          <div style={{ marginBottom: '2rem' }}>
-            <WeatherPanel destination={currentSearch.destination.label} />
-          </div>
-        )}
+
 
         {!loading && (
           <div style={{ marginBottom: '2rem' }}>
@@ -475,6 +472,6 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           }}
         />
       )}
-    </div>
+    </>
   );
 }
