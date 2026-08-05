@@ -30,13 +30,24 @@ const resources = {
       "flight_status": "Live Status",
       "check_in": "Check-in",
       "loading": "Loading...",
-      "not_logged_in": "Not logged in"
+      "not_logged_in": "Not logged in",
+      "multi_city": "Multi-City",
+      "route_selection": "Route Selection",
+      "add_flight_leg": "Add Flight Leg",
+      "origin_continent": "Origin (Continent)",
+      "origin_country": "Origin (Country)",
+      "origin_airport": "Origin (Airport)",
+      "dest_continent": "Destination (Continent)",
+      "dest_country": "Destination (Country)",
+      "dest_airport": "Destination (Airport)",
+      "schedule_pax": "Schedule & Passengers",
+      "optional_for_one_way": "(Optional for One-way)"
     }
   },
   'zh-TW': {
     translation: {
       "app_title": "Nexus 航班",
-      "search_flights": "機票搜尋",
+      "search_flights": "搜尋航班",
       "book_flights": "購票管理",
       "saved_flights": "已儲存航班",
       "my_bookings": "我的訂單",
@@ -59,7 +70,18 @@ const resources = {
       "flight_status": "航班動態",
       "check_in": "線上報到",
       "loading": "載入中...",
-      "not_logged_in": "尚未登入"
+      "not_logged_in": "尚未登入",
+      "multi_city": "多城市",
+      "route_selection": "航線選擇 (Route)",
+      "add_flight_leg": "新增航段",
+      "origin_continent": "出發地 - 洲際 (Continent)",
+      "origin_country": "出發地 - 國家 (Country)",
+      "origin_airport": "出發地 - 機場 (Airport)",
+      "dest_continent": "目的地 - 洲際 (Continent)",
+      "dest_country": "目的地 - 國家 (Country)",
+      "dest_airport": "目的地 - 機場 (Airport)",
+      "schedule_pax": "時間與人數 (Schedule & Pax)",
+      "optional_for_one_way": "(單程免填)"
     }
   }
 };
