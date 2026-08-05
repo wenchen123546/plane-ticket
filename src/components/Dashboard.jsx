@@ -22,7 +22,7 @@ import LoginModal from './LoginModal';
 import SeatMap from './SeatMap';
 import { useCurrency } from '../context/CurrencyContext';
 import { getAircraftAnalysis, getRecommendations, getProviderPrices, generatePriceData, generatePriceMatrix } from '../services/mockData';
-import { fetchRealFlights, fetchAccountInfo, syncData } from '../services/api';
+import { fetchRealFlights, syncData } from '../services/api';
 import { Bell, Users, Map, CreditCard, Heart, UserCircle, Database, LogIn, LogOut, Shield, Globe, Plane, CheckCircle, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import FlightStatusModal from './FlightStatusModal';
@@ -88,13 +88,6 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
         setSavedFlights(JSON.parse(saved));
       } catch (e) {}
     }
-    
-    const user = localStorage.getItem('nexus_user');
-    if (user) {
-      setCurrentUser(user);
-    }
-    
-    loadAccountInfo();
   }, []);
   
   // State for old PriceChart (moved to sidebar)
