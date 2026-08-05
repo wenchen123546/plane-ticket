@@ -3,6 +3,7 @@ import { Search, MapPin, Calendar, Plane } from 'lucide-react';
 import Select from 'react-select';
 import { airports } from '../data/airports';
 import { airlines } from '../services/mockData';
+import { useTranslation } from 'react-i18next';
 
 // Custom styles for react-select to match our glassmorphism theme
 const customStyles = {
@@ -66,6 +67,7 @@ const customStyles = {
 };
 
 export default function FlightSearch({ onSearch }) {
+  const { t } = useTranslation();
   // Find sensible defaults from the massive list
   const defaultOrigin = airports.find(a => a.value === 'TPE') || airports[0];
   const defaultDest = airports.find(a => a.value === 'NRT') || airports[1];
@@ -215,7 +217,7 @@ export default function FlightSearch({ onSearch }) {
     <div className="search-form glass-panel animate-fade-in">
       <h2>
         <Plane size={24} className="app-header-icon" />
-        搜尋航班
+        {t('search_flights') || '搜尋航班'}
       </h2>
       
       {/* Trip Type Selector */}
@@ -237,7 +239,7 @@ export default function FlightSearch({ onSearch }) {
               transition: 'all 0.2s'
             }}
           >
-            {type === 'one-way' ? '單程' : type === 'round-trip' ? '來回' : '多城市'}
+            {type === 'one-way' ? (t('one_way') || '單程') : type === 'round-trip' ? (t('round_trip') || '來回') : (t('multi_city') || '多城市')}
           </button>
         ))}
       </div>
@@ -247,7 +249,7 @@ export default function FlightSearch({ onSearch }) {
         {/* 航線選擇區 */}
         <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
           <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <MapPin size={14} /> 航線選擇 (Route)
+            <MapPin size={14} /> {t('route_selection') || '航線選擇 (Route)'}
           </h4>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -262,14 +264,14 @@ export default function FlightSearch({ onSearch }) {
                         onChange={(val) => updateMultiCityLeg(index, 'origin', val)}
                         options={enrichedAirports}
                         styles={customStyles}
-                        placeholder={`第 ${index + 1} 段出發地...`}
+                        placeholder={t('origin') || `第 ${index + 1} 段出發地...`}
                       />
                       <Select
                         value={leg.destination}
                         onChange={(val) => updateMultiCityLeg(index, 'destination', val)}
                         options={enrichedAirports}
                         styles={customStyles}
-                        placeholder={`第 ${index + 1} 段目的地...`}
+                        placeholder={t('destination') || `第 ${index + 1} 段目的地...`}
                       />
                       <input 
                         type="date"
@@ -287,7 +289,7 @@ export default function FlightSearch({ onSearch }) {
                 ))}
                 {multiCityLegs.length < 5 && (
                   <button type="button" onClick={addMultiCityLeg} style={{ padding: '0.75rem', background: 'transparent', border: '1px dashed var(--accent-primary)', color: 'var(--accent-primary)', borderRadius: '8px', cursor: 'pointer' }}>
-                    + 新增航段
+                    + {t('add_flight_leg') || '新增航段'}
                   </button>
                 )}
               </div>
@@ -296,7 +298,7 @@ export default function FlightSearch({ onSearch }) {
               <>
             {/* Origin Cascading */}
             <div className="form-group">
-              <label>出發地 - 洲際 (Continent)</label>
+              <label>{t('origin_continent') || '出發地 - 洲際 (Continent)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 12 }}>
@@ -320,7 +322,7 @@ export default function FlightSearch({ onSearch }) {
             </div>
 
             <div className="form-group">
-              <label>出發地 - 國家 (Country)</label>
+              <label>{t('origin_country') || '出發地 - 國家 (Country)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 11 }}>
@@ -344,7 +346,7 @@ export default function FlightSearch({ onSearch }) {
             </div>
 
             <div className="form-group">
-              <label>出發地 - 機場 (Airport)</label>
+              <label>{t('origin_airport') || '出發地 - 機場 (Airport)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 10 }}>
@@ -370,7 +372,7 @@ export default function FlightSearch({ onSearch }) {
 
             {/* Destination Cascading */}
             <div className="form-group">
-              <label>目的地 - 洲際 (Continent)</label>
+              <label>{t('dest_continent') || '目的地 - 洲際 (Continent)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 6 }}>
@@ -394,7 +396,7 @@ export default function FlightSearch({ onSearch }) {
             </div>
 
             <div className="form-group">
-              <label>目的地 - 國家 (Country)</label>
+              <label>{t('dest_country') || '目的地 - 國家 (Country)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 5 }}>
@@ -418,7 +420,7 @@ export default function FlightSearch({ onSearch }) {
             </div>
 
             <div className="form-group">
-              <label>目的地 - 機場 (Airport)</label>
+              <label>{t('dest_airport') || '目的地 - 機場 (Airport)'}</label>
               <div className="input-with-icon">
                 <MapPin size={18} />
                 <div style={{ width: '100%', position: 'relative', zIndex: 4 }}>
@@ -474,14 +476,14 @@ export default function FlightSearch({ onSearch }) {
         {/* 時間與人數區 */}
         <div style={{ background: 'rgba(255,255,255,0.02)', padding: '1.25rem', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
           <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Calendar size={14} /> {tripType === 'multi-city' ? '人數 (Pax)' : '時間與人數 (Schedule & Pax)'}
+            <Calendar size={14} /> {tripType === 'multi-city' ? (t('passengers') || '人數 (Pax)') : (t('schedule_pax') || '時間與人數 (Schedule & Pax)')}
           </h4>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem' }}>
             {tripType !== 'multi-city' && (
               <>
                 <div className="form-group">
-                  <label>去程 (Departure)</label>
+                  <label>{t('departure_date') || '去程 (Departure)'}</label>
                   <div className="input-with-icon">
                     <Calendar size={18} />
                     <input 
@@ -494,7 +496,7 @@ export default function FlightSearch({ onSearch }) {
                 </div>
                 
                 <div className="form-group" style={{ opacity: tripType === 'one-way' ? 0.5 : 1 }}>
-                  <label>回程 (Return) {tripType === 'one-way' && '(單程免填)'}</label>
+                  <label>{t('return_date') || '回程 (Return)'} {tripType === 'one-way' && (t('optional_for_one_way') || '(單程免填)')}</label>
                   <div className="input-with-icon">
                     <Calendar size={18} />
                     <input 
