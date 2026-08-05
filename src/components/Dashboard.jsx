@@ -184,8 +184,8 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
   // (Moved handleLogout to App.jsx)
 
   return (
-    <div className="main-dashboard" style={{ gridTemplateColumns: '1fr' }}>
-      <div className="dashboard-content">
+    <div className="main-dashboard">
+      <div className="dashboard-content left-column">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
           <div>
             <h1 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -234,36 +234,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           </div>
         )}
 
-        {!loading && (
-          <div style={{ marginTop: '2rem' }}>
-            <PriceRadarList trackedRoutes={trackedRoutes} />
-          </div>
-        )}
-        
-        {!loading && (
-          <div style={{ marginTop: '2rem' }}>
-            <MileageCalculator outbound={selectedOutbound} inbound={selectedInbound} ticketClass={ticketClass} />
-          </div>
-        )}
-
-        {!loading && currentSearch?.destination && (
-          <div style={{ marginTop: '2rem' }}>
-            <WeatherPanel destination={currentSearch.destination.label} />
-          </div>
-        )}
-
-        {!loading && (
-          <div style={{ marginTop: '2rem' }}>
-            <AircraftReviewsPanel />
-          </div>
-        )}
-        
-        {!loading && (
-          <div style={{ marginTop: '2rem' }}>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>未來 30 天價格趨勢</h3>
-            <PriceChart data={priceData} />
-          </div>
-        )}
+        {/* Rest of the main flight results will be here */}
 
         {loading ? (
           <div className="glass-panel" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
@@ -370,6 +341,40 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
                </div>
             )}
           </>
+        )}
+      </div>
+
+      <div className="dashboard-content right-column">
+        {/* Right column widgets */}
+        {!loading && (
+          <div style={{ marginBottom: '2rem' }}>
+            <PriceRadarList trackedRoutes={trackedRoutes} />
+          </div>
+        )}
+        
+        {!loading && (
+          <div style={{ marginBottom: '2rem' }}>
+            <MileageCalculator outbound={selectedOutbound} inbound={selectedInbound} ticketClass={ticketClass} />
+          </div>
+        )}
+
+        {!loading && currentSearch?.destination && (
+          <div style={{ marginBottom: '2rem' }}>
+            <WeatherPanel destination={currentSearch.destination.label} />
+          </div>
+        )}
+
+        {!loading && (
+          <div style={{ marginBottom: '2rem' }}>
+            <AircraftReviewsPanel />
+          </div>
+        )}
+        
+        {!loading && (
+          <div style={{ marginBottom: '2rem' }}>
+            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>未來 30 天價格趨勢</h3>
+            <PriceChart data={priceData} />
+          </div>
         )}
       </div>
       
