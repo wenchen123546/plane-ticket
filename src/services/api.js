@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+// ==========================================
+// API Configuration
+// ==========================================
+// Vercel 部署時，如果透過 vercel.json rewrite，可以用 '/api'
+// 為了本機與雲端共用，建議使用環境變數或直接指定 Render 網址
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Transform SerpApi Google Flights response to our frontend format
 const transformFlight = (flightData, isReturn = false, originCode, destCode, dateStr) => {
   // Sometimes a trip has multiple legs (flights array)
@@ -74,7 +81,7 @@ export const fetchRealFlights = async (origin, dest, date, isReturn = false, dir
       type: '2' // one-way
     };
 
-    const response = await axios.get('http://localhost:5000/api/flights', { params });
+    const response = await axios.get(`${API_URL}/flights`, { params });
     
     const outDateStr = date.split('T')[0];
     const allFlights = [
@@ -116,7 +123,7 @@ export const fetchRealFlights = async (origin, dest, date, isReturn = false, dir
 
 export const fetchAccountInfo = async () => {
   try {
-    const response = await fetch(`http://localhost:5000/api/account`);
+    const response = await fetch(`${API_URL}/account`);
     if (!response.ok) {
       throw new Error(`Account API error: ${response.status}`);
     }
