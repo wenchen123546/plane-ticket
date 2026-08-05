@@ -295,7 +295,7 @@ export default function FlightSearch({ onSearch }) {
               </div>
             ) : (
               // One-way / Round-trip Mode (Cascading)
-              <>
+          <div className="cascading-grid">
             {/* Origin Cascading */}
             <div className="form-group">
               <label>{t('origin_continent') || '出發地 - 洲際 (Continent)'}</label>
@@ -368,8 +368,11 @@ export default function FlightSearch({ onSearch }) {
               </div>
             </div>
 
+          </div>
+
             <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.05)', margin: '0.5rem 0' }} />
 
+          <div className="cascading-grid">
             {/* Destination Cascading */}
             <div className="form-group">
               <label>{t('dest_continent') || '目的地 - 洲際 (Continent)'}</label>
@@ -468,6 +471,7 @@ export default function FlightSearch({ onSearch }) {
                 })}
               </div>
             </div>
+          </div>
           </>
         )}
           </div>
@@ -479,7 +483,7 @@ export default function FlightSearch({ onSearch }) {
             <Calendar size={14} /> {tripType === 'multi-city' ? (t('passengers') || '人數 (Pax)') : (t('schedule_pax') || '時間與人數 (Schedule & Pax)')}
           </h4>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1rem' }}>
+          <div className="schedule-grid" style={{ marginBottom: '1rem' }}>
             {tripType !== 'multi-city' && (
               <>
                 <div className="form-group">
