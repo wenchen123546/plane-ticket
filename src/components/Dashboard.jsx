@@ -185,7 +185,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
 
   return (
     <>
-      <div className="dashboard-header" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div className="dashboard-header" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
           <h1 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             {t('search_flights')} <Sparkles className="icon-pulse" color="var(--accent-primary)" />
@@ -199,7 +199,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           <FlightSearch onSearch={handleSearch} />
         
         {!loading && savedFlights.length > 0 && (
-          <div style={{ marginTop: '2rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1.25rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
+          <div style={{ marginTop: '1.5rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1.25rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
             <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Heart size={18} color="#ef4444" /> 我的最愛航班 ({savedFlights.length})
             </h3>
@@ -348,13 +348,13 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
       <div className="dashboard-content right-column">
         {/* Right column widgets */}
         {!loading && (
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <PriceRadarList trackedRoutes={trackedRoutes} />
           </div>
         )}
         
         {!loading && (
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <MileageCalculator outbound={selectedOutbound} inbound={selectedInbound} ticketClass={ticketClass} />
           </div>
         )}
@@ -362,13 +362,13 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
 
 
         {!loading && (
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <AircraftReviewsPanel />
           </div>
         )}
         
         {!loading && (
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>未來 30 天價格趨勢</h3>
             <PriceChart data={priceData} />
           </div>
