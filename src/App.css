@@ -1,6 +1,6 @@
 .app-container {
-  max-width: 1600px;
-  width: 100%;
+  max-width: 1920px;
+  width: 96%;
   margin: 0 auto;
   padding: 2rem;
   display: flex;
@@ -125,15 +125,17 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  width: 100%;
 }
 
 .schedule-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  width: 100%;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .cascading-grid {
     grid-template-columns: 1fr 1fr 1.5fr;
   }
