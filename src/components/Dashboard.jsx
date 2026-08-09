@@ -189,6 +189,14 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           </h1>
           <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Find your next cyberpunk destination</p>
         </div>
+        {accountInfo && accountInfo.plan_searches_left !== undefined && (
+          <div className="glass-panel" style={{ padding: '0.5rem 1rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.25rem' }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>剩餘免費搜尋次數 (API)</span>
+            <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--accent-primary)' }}>
+              {accountInfo.plan_searches_left} <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>次</span>
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="dashboard-top-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '1.5rem' }}>
