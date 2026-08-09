@@ -3,9 +3,9 @@ import { Briefcase, Luggage, Star } from 'lucide-react';
 
 export default function TicketClassSwitcher({ currentClass, onChangeClass }) {
   const classes = [
-    { id: 'light', name: '輕裝上陣', desc: '手提 7kg', icon: <Briefcase size={18} />, color: 'var(--text-secondary)' },
-    { id: 'standard', name: '標準旅行', desc: '含 23kg 托運', icon: <Luggage size={18} />, color: 'var(--accent-primary)' },
-    { id: 'business', name: '商務尊榮', desc: '40kg + 優先選位', icon: <Star size={18} />, color: 'var(--warning)' }
+    { id: 'light', name: '輕裝上陣', desc: '手提 7kg', icon: <Briefcase size={18} />, color: 'var(--text-secondary)', bg: 'rgba(156, 163, 175, 0.15)' },
+    { id: 'standard', name: '標準旅行', desc: '含 23kg 托運', icon: <Luggage size={18} />, color: 'var(--accent-primary)', bg: 'rgba(14, 165, 233, 0.15)' },
+    { id: 'business', name: '商務尊榮', desc: '40kg + 優先選位', icon: <Star size={18} />, color: 'var(--warning)', bg: 'rgba(234, 179, 8, 0.15)' }
   ];
 
   return (
@@ -19,7 +19,7 @@ export default function TicketClassSwitcher({ currentClass, onChangeClass }) {
             onClick={() => onChangeClass(c.id)}
             style={{ 
               borderColor: isActive ? c.color : 'transparent',
-              background: isActive ? `${c.color}15` : 'transparent'
+              background: isActive ? c.bg : 'transparent'
             }}
           >
             <div className="class-icon" style={{ color: isActive ? c.color : 'var(--text-secondary)' }}>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Compass } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
 
-export default function BudgetExplorer() {
+export default function BudgetExplorer({ onSelectDestination }) {
   const { formatPrice } = useCurrency();
   const [budget, setBudget] = useState(15000);
   const [month, setMonth] = useState(new Date().getMonth() + 1);
@@ -60,7 +60,12 @@ export default function BudgetExplorer() {
           const isAffordable = price <= budget;
           
           return (
-            <div key={dest.code} className={`dest-card glass-panel ${isAffordable ? 'affordable' : 'unaffordable'}`}>
+            <div 
+              key={dest.code} 
+              className={`dest-card glass-panel ${isAffordable ? 'affordable' : 'unaffordable'}`}
+              onClick={() => onSelectDestination && onSelectDestination(dest.code)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className="dest-image-placeholder">{dest.image}</div>
               <div className="dest-info">
                 <h3>{dest.name}</h3>

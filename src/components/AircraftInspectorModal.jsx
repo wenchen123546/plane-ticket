@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Plane, Maximize, VolumeX, Wind, Monitor, Wifi, BatteryCharging, Quote, Star } from 'lucide-react';
 import { getDetailedAircraftStats, getAircraftReviews } from '../services/mockData';
 
 export default function AircraftInspectorModal({ isOpen, onClose, aircraft }) {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+    }
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const stats = getDetailedAircraftStats(aircraft);
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content inspector-modal" onClick={e => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}><X /></button>
+        <button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>
         
         <div className="inspector-header">
           <Plane size={48} className="app-header-icon" style={{ marginBottom: '0.5rem', color: 'var(--accent-primary)' }} />

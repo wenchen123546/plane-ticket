@@ -5,13 +5,21 @@ import { useCurrency } from '../context/CurrencyContext';
 export default function MileageCalculator({ outbound, inbound, ticketClass }) {
   if (!outbound && !inbound) return null;
 
-  // Mock distance calculation based on regions (roughly)
   const getDistance = (flight) => {
-    if (!flight) return 0;
-    // TPE to NRT/KIX ~ 1300 miles
-    // TPE to BKK ~ 1500 miles
-    // TPE to US/Europe ~ 6000+ miles
-    return 1500; 
+    if (!flight?.departure?.airport || !flight?.arrival?.airport) return 1500;
+    const airports = require('../data/airports').airports;
+    const orig = airports.find(a => a.value === flight.departure.airport);
+    const dest = airports.find(a => a.value === flight.arrival.airport);
+    if (!orig?.lat || !dest?.lat) return 1500;
+    
+    const R = 3959; // Earth radius in miles
+    const dLat = (dest.lat - orig.lat) * Math.PI / 180;
+    const dLon = (dest.lon - orig.lon) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(orig.lat * Math.PI / 180) * Math.cos(dest.lat * Math.PI / 180) *
+      Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return Math.round(R * c);
   };
 
   const { formatPrice } = useCurrency();

@@ -6,7 +6,7 @@ export default function FlightList({ title, flights, selectedFlight, onSelectFli
 
   const sortedFlights = [...(flights || [])].sort((a, b) => {
     if (sortBy === 'price') return a.price - b.price;
-    return a.departure.time - b.departure.time; // Default sort by time
+    return String(a.departure.time).localeCompare(String(b.departure.time)); // Default sort by time
   });
 
   return (

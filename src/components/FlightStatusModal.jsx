@@ -6,6 +6,14 @@ import { useTranslation } from 'react-i18next';
 export default function FlightStatusModal({ flightNum, onClose }) {
   const { t } = useTranslation();
   const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -24,9 +32,9 @@ export default function FlightStatusModal({ flightNum, onClose }) {
   }, [flightNum]);
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content glass-panel" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px' }}>
-        <button className="modal-close" onClick={onClose}><X size={20} /></button>
+        <button className="modal-close" onClick={onClose} aria-label="Close"><X size={20} /></button>
         <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
           <Plane className="icon-pulse" color="var(--accent-primary)" /> {t('flight_status') || '即時航班動態'} - {flightNum}
         </h2>

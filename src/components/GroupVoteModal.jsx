@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Users, Share2, DollarSign } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
 
@@ -20,10 +20,18 @@ export default function GroupVoteModal({ isOpen, onClose, totalPrice, passengers
 
   const perPersonPrice = Math.floor(totalPrice / (passengers || 1));
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content group-vote-modal" onClick={e => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}><X /></button>
+        <button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>
         
         <div className="modal-header">
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Users size={24} color="var(--accent-primary)" /> 揪團投票與分帳系統</h2>

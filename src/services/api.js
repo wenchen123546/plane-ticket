@@ -188,7 +188,7 @@ export const syncData = async (savedFlights, passengerProfile) => {
 
 export const getUserData = async () => {
   try {
-    const res = await fetch(`${API_URL}/user/data`, {
+    const res = await fetch(`${API_URL}/user/info`, {
       headers: getAuthHeaders()
     });
     if (!res.ok) return null;

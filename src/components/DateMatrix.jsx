@@ -3,7 +3,7 @@ import { useCurrency } from '../context/CurrencyContext';
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { TrendingDown, Sparkles } from 'lucide-react';
 
-export default function DateMatrix({ matrixData }) {
+export default function DateMatrix({ matrixData, onSelectDate }) {
   const { formatPrice } = useCurrency();
   if (!matrixData || matrixData.length === 0) return null;
 
@@ -51,7 +51,14 @@ export default function DateMatrix({ matrixData }) {
             <div 
               key={i} 
               className={`matrix-cell ${day.offset === 0 ? 'matrix-center' : ''}`}
-              style={{ backgroundColor: getHeatmapColor(day.price) }}
+              style={{ 
+                backgroundColor: getHeatmapColor(day.price),
+                cursor: 'pointer',
+                transition: 'transform 0.2s, boxShadow 0.2s'
+              }}
+              onClick={() => onSelectDate && onSelectDate(day.date.toISOString())}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
             >
               <span className="matrix-date" style={{ whiteSpace: 'nowrap' }}>{formatDate(day.date)}</span>
               <span className="matrix-price" style={{ whiteSpace: 'nowrap', fontSize: '0.85rem' }}>{formatPrice(day.price)}</span>

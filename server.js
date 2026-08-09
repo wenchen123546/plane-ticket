@@ -132,7 +132,8 @@ app.post('/api/auth/register', async (req, res) => {
 app.post('/api/auth/login', async (req, res) => {
   const { username, password } = req.body;
   try {
-    const stmt = db.prepare(''); user = await stmt.get(username);
+    const stmt = db.prepare('SELECT * FROM users WHERE username = ?');
+    const user = await stmt.get(username);
     
     if (!user) return res.status(400).json({ error: 'User not found' });
     
@@ -185,12 +186,14 @@ app.post('/api/user/sync', authenticateToken, async (req, res) => {
     // We just overwrite for simplicity (store as JSON string)
     if (savedFlights) {
       await db.prepare('DELETE FROM saved_flights WHERE user_id = ?').run(userId);
-      const stmt = db.prepare(''); stmt.run(userId, JSON.stringify(savedFlights));
+      const stmt = db.prepare('INSERT INTO saved_flights (user_id, flight_data) VALUES (?, ?)');
+      await stmt.run(userId, JSON.stringify(savedFlights));
     }
     
     if (passengerProfile) {
       await db.prepare('DELETE FROM passenger_profiles WHERE user_id = ?').run(userId);
-      const stmt = db.prepare(''); stmt.run(userId, JSON.stringify(passengerProfile));
+      const stmt = db.prepare('INSERT INTO passenger_profiles (user_id, profile_data) VALUES (?, ?)');
+      await stmt.run(userId, JSON.stringify(passengerProfile));
     }
     
     res.json({ success: true, message: 'Data synced successfully' });

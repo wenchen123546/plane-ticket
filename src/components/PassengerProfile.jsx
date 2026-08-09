@@ -10,7 +10,7 @@ export default function PassengerProfile({ isOpen, onClose }) {
   const [copiedId, setCopiedId] = useState(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('flight_passengers');
+    const saved = localStorage.getItem('passenger_profiles');
     if (saved) {
       setPassengers(JSON.parse(saved));
     }
@@ -18,7 +18,7 @@ export default function PassengerProfile({ isOpen, onClose }) {
 
   const savePassengers = (newPass) => {
     setPassengers(newPass);
-    localStorage.setItem('flight_passengers', JSON.stringify(newPass));
+    localStorage.setItem('passenger_profiles', JSON.stringify(newPass));
   };
 
   const handleAdd = (e) => {

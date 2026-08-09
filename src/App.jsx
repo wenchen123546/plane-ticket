@@ -9,6 +9,7 @@ import PassengerProfile from './components/PassengerProfile';
 import { useCurrency } from './context/CurrencyContext';
 import { useTranslation } from 'react-i18next';
 import { fetchAccountInfo } from './services/api';
+import { ToastProvider } from './components/Toast';
 
 function App() {
   const [activeTab, setActiveTab] = useState('search');
@@ -72,6 +73,7 @@ function App() {
   };
 
   return (
+    <ToastProvider>
     <div className="app-container" style={getBgStyle()}>
       <header className="app-header animate-fade-in">
         <div className="header-logo">
@@ -168,7 +170,7 @@ function App() {
             accountInfo={accountInfo}
           />
         ) : (
-          <BudgetExplorer />
+          <BudgetExplorer onSelectDestination={() => setActiveTab('search')} />
         )}
       </main>
 
@@ -192,6 +194,7 @@ function App() {
         />
       )}
     </div>
+    </ToastProvider>
   );
 }
 

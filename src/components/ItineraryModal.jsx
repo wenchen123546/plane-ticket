@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, MapPin, Coffee, Camera, Moon, Plane } from 'lucide-react';
 
 export default function ItineraryModal({ isOpen, onClose, destination, flight }) {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+    }
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const cityName = destination === 'NRT' ? '東京' : destination === 'BKK' ? '曼谷' : destination === 'ICN' ? '首爾' : '目的地';
@@ -15,9 +25,9 @@ export default function ItineraryModal({ isOpen, onClose, destination, flight })
   ];
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content itinerary-modal" onClick={e => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}><X /></button>
+        <button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>
         <div className="modal-header">
           <h2>🤖 AI 為您專屬規劃：{cityName} 5天4夜 深度之旅</h2>
           <p style={{ color: 'var(--text-secondary)' }}>根據您的航班時間，為您打造的最佳行程組合</p>

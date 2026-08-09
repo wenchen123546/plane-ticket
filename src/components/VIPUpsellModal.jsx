@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Crown, Coffee, Zap } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
 
@@ -7,12 +7,20 @@ export default function VIPUpsellModal({ isOpen, onClose, onFinish }) {
   const [fastTrack, setFastTrack] = useState(false);
   const [lounge, setLounge] = useState(false);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content vip-upsell-modal" onClick={e => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}><X /></button>
+        <button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>
         
         <div className="vip-header">
           <Crown size={48} color="#fbbf24" style={{ marginBottom: '1rem' }} />

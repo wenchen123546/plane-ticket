@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, BookOpen, Search, Clock, Plane, Info, Star, Map, CreditCard, Users } from 'lucide-react';
 
 export default function UserGuideModal({ isOpen, onClose }) {
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleEsc);
+    }
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay animate-fade-in" onClick={onClose} style={{ zIndex: 9999 }}>
+    <div className="modal-overlay animate-fade-in" onClick={onClose} style={{ zIndex: 9999 }} role="dialog" aria-modal="true">
       <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '800px', maxHeight: '85vh', overflowY: 'auto' }}>
-        <button className="close-btn" onClick={onClose}><X /></button>
+        <button className="close-btn" onClick={onClose} aria-label="Close"><X /></button>
         
         <div style={{ textAlign: 'center', marginBottom: '2rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1.5rem' }}>
           <BookOpen size={48} style={{ color: 'var(--accent-primary)', marginBottom: '1rem' }} />

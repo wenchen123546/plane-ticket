@@ -24,9 +24,11 @@ import { Bell, Users, Map, CreditCard, Heart, Plane, CheckCircle, Sparkles } fro
 import { useTranslation } from 'react-i18next';
 import FlightStatusModal from './FlightStatusModal';
 import CheckInModal from './CheckInModal';
+import { useToast } from './Toast';
 
 export default function Dashboard({ savedFlights, setSavedFlights, currentUser, accountInfo }) {
   const { t } = useTranslation();
+  const { showToast } = useToast();
   const [loading, setLoading] = useState(true);
   
   // States for Flight Lists
@@ -139,6 +141,15 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
     fetchAnalysis(searchParams);
   };
 
+  const handleSelectDate = (date) => {
+    if (currentSearch) {
+      handleSearch({
+        ...currentSearch,
+        depTime: date
+      });
+    }
+  };
+
   const handleTrackPrice = () => {
     if (!currentSearch) return;
     setSubscribeTargetPrice(Math.floor(currentMatrixAvg * 0.8)); // Default target 20% off
@@ -148,7 +159,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
   const submitSubscription = async () => {
     try {
       // Dummy call
-      alert('✅ 成功訂閱降價通知！當票價低於您的目標價格時，我們將發送 Email 通知您。');
+      showToast('✅ 成功訂閱降價通知！當票價低於您的目標價格時，我們將發送 Email 通知您。');
       
       // Also add to local tracked routes for the radar list UI
       if (!trackedRoutes.find(r => r.id === `${currentSearch.origin}-${currentSearch.destination}`)) {
@@ -165,7 +176,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
       setShowSubscribeModal(false);
     } catch (error) {
       console.error(error);
-      alert('❌ 訂閱失敗，請檢查伺服器是否運行。');
+      showToast('❌ 訂閱失敗，請檢查伺服器是否運行。');
     }
   };
 
@@ -270,7 +281,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
                 currentPrice={Math.floor((matrixData.find(d => d.offset === 0)?.price || 15000) * currentMultiplier)} 
                 historyAvg={Math.floor(currentMatrixAvg * currentMultiplier)} 
               />
-              <DateMatrix matrixData={matrixData.map(d => ({...d, price: Math.floor(d.price * currentMultiplier)}))} />
+              <DateMatrix matrixData={matrixData.map(d => ({...d, price: Math.floor(d.price * currentMultiplier)}))} onSelectDate={handleSelectDate} />
             </div>
             
             <div style={{ marginBottom: '1.5rem' }}>
@@ -278,6 +289,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
                 basePrice={Math.floor(currentMatrixAvg * currentMultiplier)}
                 multiplier={currentMultiplier}
                 currentDate={currentSearch?.depTime || new Date().toISOString()}
+                onSelectDate={handleSelectDate}
               />
             </div>
 
@@ -401,7 +413,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           const basePrice = ((selectedOutbound?.price || 0) + (selectedInbound?.price || 0)) * currentMultiplier * passengers;
           const addons = (fastTrack ? 800 : 0) + (lounge ? 1200 : 0);
           const total = basePrice + addons;
-          alert(`準備導向第三方金流系統...\n\n劃位座號: ${checkoutSeat}\n機票總價: ${formatPrice(basePrice)}\n加值服務: ${formatPrice(addons)}\n\n最終應付總額: ${formatPrice(total)}`);
+          showToast(`準備導向第三方金流系統...\n\n劃位座號: ${checkoutSeat}\n機票總價: ${formatPrice(basePrice)}\n加值服務: ${formatPrice(addons)}\n\n最終應付總額: ${formatPrice(total)}`);
           setIsVirtualSeatMapOpen(false);
         }} />
       )}
@@ -462,7 +474,7 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
           isOpen={isCheckoutSeatMapOpen}
           onClose={() => setIsCheckoutSeatMapOpen(false)}
           onConfirm={(totalPrice, selectedSeat) => {
-            alert(`結帳成功！您已預訂 ${checkoutFlight.airline} 航班。\n${selectedSeat ? `座位: ${selectedSeat.id} (${selectedSeat.type})` : '系統隨機安排座位'}\n總價: ${formatPrice(totalPrice)}`);
+            showToast(`結帳成功！您已預訂 ${checkoutFlight.airline} 航班。\n${selectedSeat ? `座位: ${selectedSeat.id} (${selectedSeat.type})` : '系統隨機安排座位'}\n總價: ${formatPrice(totalPrice)}`);
             setIsCheckoutSeatMapOpen(false);
           }}
         />

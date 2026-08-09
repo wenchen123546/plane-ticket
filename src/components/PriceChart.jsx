@@ -4,16 +4,17 @@ import {
 } from 'recharts';
 import { TrendingUp } from 'lucide-react';
 import { useCurrency } from '../context/CurrencyContext';
+import { generatePriceData } from '../services/mockData';
 
 export default function PriceChart({ data }) {
   const [timeRange, setTimeRange] = useState('30D');
   const { formatPrice } = useCurrency();
 
   const filteredData = useMemo(() => {
-    if (!data) return [];
     const days = timeRange === '7D' ? 7 : timeRange === '90D' ? 90 : 30;
-    return data.slice(-Math.min(days + 1, data.length));
-  }, [data, timeRange]);
+    // Generate fresh data for the selected range to ensure we have enough days
+    return generatePriceData(days);
+  }, [timeRange]);
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {

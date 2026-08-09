@@ -50,6 +50,30 @@ export default function FlightCard({ flight, isSelected, onSelect, onInspectAirc
     window.dispatchEvent(new Event('storage'));
   };
 
+  const getAirlineLogo = (airlineName) => {
+    const match = airlineName?.match(/\(([^)]+)\)/);
+    const englishName = match ? match[1] : airlineName;
+    const domainMap = {
+      'EVA Air': 'evaair.com',
+      'China Airlines': 'china-airlines.com',
+      'STARLUX': 'starlux-airlines.com',
+      'Cathay Pacific': 'cathaypacific.com',
+      'JAL': 'jal.co.jp',
+      'ANA': 'ana.co.jp',
+      'Korean Air': 'koreanair.com',
+      'Singapore Airlines': 'singaporeair.com',
+      'Emirates': 'emirates.com',
+      'Qatar Airways': 'qatarairways.com',
+    };
+    const domain = domainMap[englishName];
+    if (domain) {
+      return `https://logo.clearbit.com/${domain}`;
+    }
+    return null;
+  };
+  const logoUrl = getAirlineLogo(flight.airline);
+  const [imageError, setImageError] = useState(false);
+
   return (
     <div 
       className={`flight-card glass-panel ${isSelected ? 'selected' : ''}`}
@@ -64,9 +88,13 @@ export default function FlightCard({ flight, isSelected, onSelect, onInspectAirc
       <div className="flight-card-main">
         <div style={{ width: '100%' }}>
           <div className="flight-airline-info" style={{ display: 'flex', alignItems: 'center' }}>
-            <div className="airline-logo-placeholder">
-              <Plane size={20} />
-          </div>
+            <div className="airline-logo-placeholder" style={{ overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              {logoUrl && !imageError ? (
+                <img src={logoUrl} alt={flight.airline} onError={() => setImageError(true)} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+              ) : (
+                <Plane size={20} />
+              )}
+            </div>
           <div className="airline-details">
             <h4>{flight.airline}</h4>
             <span className="flight-num">{flight.flightNum}</span>

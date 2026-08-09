@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useCurrency } from '../context/CurrencyContext';
 
-export default function PriceCalendar({ basePrice, multiplier, currentDate }) {
+export default function PriceCalendar({ basePrice, multiplier, currentDate, onSelectDate }) {
   const { formatPrice } = useCurrency();
   
   const generateCalendarDays = useMemo(() => {
@@ -64,6 +64,13 @@ export default function PriceCalendar({ basePrice, multiplier, currentDate }) {
         {generateCalendarDays.days.map((dayObj, i) => (
           <div 
             key={i} 
+            onClick={() => {
+              if (dayObj && onSelectDate) {
+                const date = new Date(currentDate || Date.now());
+                date.setDate(dayObj.day);
+                onSelectDate(date.toISOString());
+              }
+            }}
             style={{ 
               padding: '0.75rem 0.25rem', 
               background: dayObj ? (dayObj.isCheapest ? 'rgba(16, 185, 129, 0.2)' : 'rgba(0,0,0,0.2)') : 'transparent',

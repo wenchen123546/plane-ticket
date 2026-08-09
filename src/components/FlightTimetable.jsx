@@ -42,6 +42,12 @@ const generateTimetable = () => {
 
 export default function FlightTimetable({ originAirport }) {
   const [flights, setFlights] = useState([]);
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const clockInterval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(clockInterval);
+  }, []);
 
   useEffect(() => {
     setFlights(generateTimetable());
@@ -86,7 +92,7 @@ export default function FlightTimetable({ originAirport }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', color: '#888', fontFamily: 'monospace' }}>
           <Clock size={16} />
-          <span>LOCAL TIME {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+          <span>LOCAL TIME {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}</span>
         </div>
       </div>
       
