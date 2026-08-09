@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { generateFlights } from './mockData';
 
 // ==========================================
 // API Configuration
@@ -117,8 +118,9 @@ export const fetchRealFlights = async (origin, dest, date, isReturn = false, dir
     return mapped;
 
   } catch (error) {
-    console.error('Error fetching real flights:', error);
-    return []; // Return empty array on failure
+    console.warn('Real flights API failed (e.g., missing API key), falling back to mock data.', error.message);
+    const mockFlights = generateFlights(origin, dest, date, isReturn, directOnly, preferredAirline);
+    return mockFlights;
   }
 };
 
