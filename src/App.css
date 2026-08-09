@@ -1,0 +1,1820 @@
+.app-container {
+  max-width: 1920px;
+  width: 96%;
+  margin: 0 auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  background: linear-gradient(to right, var(--text-primary), var(--accent-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-header-icon {
+  color: var(--accent-primary);
+}
+
+.main-dashboard {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Tablet & standard laptop */
+@media (min-width: 1024px) {
+  .main-dashboard {
+    grid-template-columns: 1.6fr 1fr;
+  }
+}
+
+/* Ultra wide screen */
+@media (min-width: 1440px) {
+  .main-dashboard {
+    grid-template-columns: 2.2fr 1fr;
+  }
+}
+
+/* --- FlightSearch Component --- */
+.search-form {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+.search-form h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon svg {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+  position: relative;
+  z-index: 5;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cascading-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .cascading-grid {
+    grid-template-columns: 1fr 1fr 1.5fr;
+  }
+  .schedule-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.search-btn {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* --- Dashboard Right Column --- */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- PriceChart Component --- */
+.chart-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 400px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-header h2 {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chart-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.chart-actions button.active {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-primary);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.recharts-responsive-container {
+  flex: 1;
+  min-height: 0;
+}
+
+/* --- RecommendationCard Component --- */
+.recommendation-card {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.recommendation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+}
+
+.recommendation-card.excellent::before { background: var(--success); }
+.recommendation-card.good::before { background: var(--warning); }
+.recommendation-card.wait::before { background: var(--danger); }
+
+.rec-content {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.rec-icon {
+  padding: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.excellent .rec-icon { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.good .rec-icon { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.wait .rec-icon { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+.rec-text h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.excellent .rec-text h3 { color: var(--success); }
+.good .rec-text h3 { color: var(--warning); }
+.wait .rec-text h3 { color: var(--danger); }
+
+.rec-text p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.rec-action-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.excellent .rec-action-btn { background: var(--success); color: white; animation: pulse-glow 2s infinite; }
+.good .rec-action-btn { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--glass-border); }
+.wait .rec-action-btn { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid var(--glass-border); }
+
+.rec-action-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* --- ProviderComparison Component --- */
+.provider-comparison {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.provider-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.provider-header h2 {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.provider-header .subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-left: 2rem;
+}
+
+.provider-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.provider-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.provider-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+
+.provider-item.best-price {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.best-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--success);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.provider-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-top: 0.5rem; /* Space for absolute badge */
+}
+
+.provider-item:not(.best-price) .provider-info {
+  padding-top: 0;
+}
+
+.provider-info h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.provider-type {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.provider-action {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.provider-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  color: var(--text-primary);
+}
+
+.provider-price .currency {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.provider-price .amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.best-price .provider-price .amount {
+  color: var(--success);
+}
+
+.book-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.book-btn:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+}
+
+/* --- FlightList Component --- */
+.flight-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.list-header h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.sort-select {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  outline: none;
+}
+
+.flights-scroll-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* --- FlightCard Component --- */
+.flight-card {
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--glass-border);
+}
+
+.flight-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.flight-card.selected {
+  border-color: var(--accent-primary);
+  background: rgba(59, 130, 246, 0.05);
+  box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+.flight-card-main {
+  display: grid;
+  grid-template-columns: 2fr 3fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .flight-card-main {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.flight-airline-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.airline-logo-placeholder {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+}
+
+.airline-details h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+}
+
+.flight-num {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.flight-times {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.time-block .time {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.time-block .airport {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.time-block .date-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.flight-duration-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 150px;
+}
+
+.duration {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.flight-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+}
+
+.flight-line .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--text-secondary);
+}
+
+.flight-line .line {
+  flex: 1;
+  height: 1px;
+  background: var(--text-secondary);
+}
+
+.plane-icon {
+  color: var(--accent-primary);
+}
+
+.stops {
+  font-size: 0.75rem;
+  color: var(--success);
+  margin-top: 0.25rem;
+}
+
+.flight-price-select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.price-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.price-tag .currency {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.price-tag .amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.select-btn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-weight: 600;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.select-btn:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.select-btn.active {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.flight-card-footer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.aircraft-info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* --- IntelligencePanel --- */
+.intelligence-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.intelligence-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+}
+
+.intelligence-panel.excellent::before { background: var(--success); }
+.intelligence-panel.wait::before { background: var(--danger); }
+.intelligence-panel.good::before { background: var(--warning); }
+
+.intel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.intel-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.intel-header-icon {
+  color: var(--accent-primary);
+}
+
+.intel-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.intel-status-icon {
+  padding: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.excellent .intel-status-icon { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.wait .intel-status-icon { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.good .intel-status-icon { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+
+.intel-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.intel-status {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.25rem;
+}
+
+.excellent .intel-status { color: var(--success); }
+.wait .intel-status { color: var(--danger); }
+.good .intel-status { color: var(--warning); }
+
+.intel-message {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* --- DateMatrix --- */
+.date-matrix-container {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.matrix-grid {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.matrix-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.matrix-grid::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+.matrix-cell {
+  flex: 1;
+  min-width: 95px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  gap: 0.25rem;
+  transition: transform 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.matrix-cell:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+}
+
+.matrix-center {
+  border: 1px solid var(--accent-primary);
+  box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+.matrix-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.matrix-price {
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.matrix-best {
+  position: absolute;
+  top: -8px;
+  background: var(--success);
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.matrix-current {
+  position: absolute;
+  bottom: -8px;
+  background: var(--accent-primary);
+  color: white;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.dashboard-top-panels {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-top-panels > div {
+  min-width: 0;
+}
+
+@media (max-width: 1200px) {
+  .dashboard-top-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- App Nav Bar --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-btn.active {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.ticket-class-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.class-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.class-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.class-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.class-name {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.class-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* --- Price Radar --- */
+.price-radar {
+  padding: 1.25rem;
+}
+
+.price-radar.empty {
+  text-align: center;
+  border: 1px dashed var(--glass-border);
+}
+
+.radar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.radar-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.empty-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.radar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.radar-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.route-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.route-cities {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.route-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.radar-price-block {
+  text-align: right;
+}
+
+.current-price {
+  font-weight: bold;
+}
+
+.price-delta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.price-delta.drop { color: var(--success); }
+.price-delta.up { color: var(--danger); }
+.price-delta.flat { color: var(--text-secondary); }
+
+/* --- Budget Explorer --- */
+.budget-explorer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.budget-header {
+  padding: 2rem;
+  text-align: center;
+}
+
+.budget-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.budget-title h2 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.budget-controls {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.budget-slider-group {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.budget-slider {
+  width: 100%;
+  accent-color: var(--accent-primary);
+}
+
+.budget-amount {
+  color: var(--accent-primary);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.month-select {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.dest-card {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+}
+
+.dest-card.affordable:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+}
+
+.dest-card.unaffordable {
+  opacity: 0.6;
+  filter: grayscale(80%);
+}
+
+.dest-image-placeholder {
+  height: 120px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.dest-info {
+  padding: 1.5rem;
+}
+
+.dest-info h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+}
+
+.dest-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.dest-price .price-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.dest-price .amount {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.affordable-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--success);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.unaffordable-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.unaffordable-overlay span {
+  background: var(--danger);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  transform: rotate(-15deg);
+  border: 2px solid white;
+}
+
+/* --- Weather & Packing Panel --- */
+.weather-packing-panel {
+  display: flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel-col {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-divider {
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.weather-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.weather-icon-large {
+  padding: 1rem;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  display: flex;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.weather-details .temp {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.weather-details .desc {
+  color: var(--text-secondary);
+}
+
+.weather-details .rain-chance {
+  font-size: 0.85rem;
+  color: var(--accent-primary);
+}
+
+.packing-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.packing-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.packing-list input[type="checkbox"] {
+  accent-color: var(--accent-primary);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.packing-list label {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .weather-packing-panel {
+    flex-direction: column;
+  }
+  .panel-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+  }
+}
+
+/* --- Modals (Itinerary & Group Vote) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--bg-dark);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.modal-header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+}
+
+.modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inline-icon {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* --- Itinerary Timeline --- */
+.itinerary-timeline {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.timeline-day {
+  font-weight: bold;
+  color: var(--accent-primary);
+  white-space: nowrap;
+  padding-top: 0.25rem;
+  min-width: 50px;
+}
+
+.timeline-content {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent-primary);
+}
+
+.timeline-content h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+}
+
+.activities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activities-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.act-icon {
+  color: var(--accent-secondary);
+  margin-top: 0.1rem;
+}
+
+/* --- Group Vote Modal --- */
+.group-vote-modal .share-link-box {
+  padding: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.group-vote-modal .share-link-box input {
+  flex: 1;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  outline: none;
+}
+
+.group-vote-modal .copy-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 0 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.vote-results, .split-bill-section {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.vote-bar-container {
+  margin-bottom: 1rem;
+}
+
+.vote-bar-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.vote-bar-track {
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.vote-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 4px;
+}
+
+.vote-price {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* --- Mileage Calculator --- */
+.mileage-calculator {
+  padding: 1.5rem;
+}
+
+.miles-display {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.miles-amount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.miles-amount .number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.miles-amount .unit {
+  color: var(--warning);
+  font-weight: bold;
+}
+
+.miles-value {
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.miles-progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+/* --- Virtual Seat Map --- */
+.seat-map-modal {
+  max-width: 800px;
+}
+
+.airplane-fuselage {
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px 100px 20px 20px;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 4rem 2rem 2rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cockpit-nose {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 60px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 0 0 50px 50px;
+}
+
+.seat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.row-number {
+  position: absolute;
+  left: -2rem;
+  width: 1.5rem;
+  text-align: right;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.seat-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.aisle {
+  width: 30px;
+}
+
+.seat-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px 8px 4px 4px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-primary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat-btn.business {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px 12px 6px 6px;
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #c4b5fd;
+}
+
+.seat-btn:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: var(--accent-primary);
+}
+
+.seat-btn.business:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.3);
+  border-color: #8b5cf6;
+}
+
+.seat-btn.selected {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.seat-btn.business.selected {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+  color: white;
+}
+
+.seat-btn:disabled, .seat-btn.occupied {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.2);
+  cursor: not-allowed;
+  position: relative;
+}
+
+.seat-btn.occupied::after {
+  content: '✕';
+  position: absolute;
+  color: rgba(255,255,255,0.2);
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.seat-btn.dummy {
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+}
+
+/* --- VIP Upsell Modal --- */
+.vip-upsell-modal {
+  background: linear-gradient(180deg, #18181b, #000000);
+  border: 1px solid #3f3f46;
+}
+
+.vip-header {
+  text-align: center;
+  padding: 3rem 2rem 2rem 2rem;
+}
+
+.vip-options {
+  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vip-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.vip-card:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.vip-card.selected {
+  background: rgba(251, 191, 36, 0.05);
+  border-color: #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+}
+
+.vip-card-content {
+  flex: 1;
+}
+
+.vip-card-content h3 {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.vip-card.selected .vip-card-content h3 {
+  color: #fbbf24;
+}
+
+.vip-card-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.vip-price {
+  font-weight: bold;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.vip-card.selected .vip-price {
+  color: #fbbf24;
+}
+
+.vip-btn:hover {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+/* --- Aircraft Inspector Modal --- */
+.inspector-modal {
+  max-width: 700px;
+}
+
+.inspector-header {
+  padding: 2rem 2rem 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inspector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+}
+
+.inspector-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s;
+}
+
+.inspector-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.inspector-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-icon {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent-primary);
+  padding: 0.75rem;
+  border-radius: 50%;
+  display: flex;
+}
+
+.card-info h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.card-info p {
+  margin: 0;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.radar-container {
+  padding: 0 2rem 2rem 2rem;
+}
+
+.score-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.score-label {
+  width: 100px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.bar-bg {
+  flex: 1;
+  height: 8px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease-out;
+}
+
+.score-val {
+  width: 30px;
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+@keyframes pulse-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
