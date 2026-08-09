@@ -191,9 +191,8 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
         </div>
       </div>
 
-      <div className="main-dashboard">
-        <div className="dashboard-content left-column">
-          <FlightSearch onSearch={handleSearch} />
+      <div className="dashboard-top-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <FlightSearch onSearch={handleSearch} />
         
         {!loading && savedFlights.length > 0 && (
           <div style={{ marginTop: '1.5rem', background: 'rgba(255, 255, 255, 0.03)', padding: '1.25rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
@@ -231,14 +230,13 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
             </div>
           </div>
         )}
+      </div>
 
-        {/* Rest of the main flight results will be here */}
-
-        {loading ? (
-          <div className="glass-panel" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
-            搜尋符合條件的航班中...
-          </div>
-        ) : (
+      {loading ? (
+        <div className="glass-panel" style={{ height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
+          搜尋符合條件的航班中...
+        </div>
+      ) : (
           <>
             <div className="dashboard-controls" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
               <TicketClassSwitcher currentClass={ticketClass} onChangeClass={setTicketClass} />
@@ -275,7 +273,9 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
               />
             </div>
 
-            <FlightTimetable originAirport={currentSearch?.originLabel || currentSearch?.origin || '未知出發地'} />
+            <div className="main-dashboard">
+              <div className="dashboard-content left-column">
+                <FlightTimetable originAirport={currentSearch?.originLabel || currentSearch?.origin || '未知出發地'} />
 
             <FlightList 
               title="✈️ 去程航班清單" 
@@ -338,40 +338,29 @@ export default function Dashboard({ savedFlights, setSavedFlights, currentUser, 
                   </div>
                </div>
             )}
-          </>
-        )}
-      </div>
+            </div> {/* end left-column */}
+            
+            <div className="dashboard-content right-column">
+              <div style={{ marginBottom: '1.5rem' }}>
+                <PriceRadarList trackedRoutes={trackedRoutes} />
+              </div>
+              
+              <div style={{ marginBottom: '1.5rem' }}>
+                <MileageCalculator outbound={selectedOutbound} inbound={selectedInbound} ticketClass={ticketClass} />
+              </div>
 
-      <div className="dashboard-content right-column">
-        {/* Right column widgets */}
-        {!loading && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <PriceRadarList trackedRoutes={trackedRoutes} />
-          </div>
-        )}
-        
-        {!loading && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <MileageCalculator outbound={selectedOutbound} inbound={selectedInbound} ticketClass={ticketClass} />
-          </div>
-        )}
-
-
-
-        {!loading && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <AircraftReviewsPanel />
-          </div>
-        )}
-        
-        {!loading && (
-          <div style={{ marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>未來 30 天價格趨勢</h3>
-            <PriceChart data={priceData} />
-          </div>
-        )}
-      </div>
-    </div>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <AircraftReviewsPanel />
+              </div>
+              
+              <div style={{ marginBottom: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--text-secondary)' }}>未來 30 天價格趨勢</h3>
+                <PriceChart data={priceData} />
+              </div>
+            </div> {/* end right-column */}
+          </div> {/* end main-dashboard */}
+        </>
+      )}
       
     <ItineraryModal 
         isOpen={isItineraryOpen} 
