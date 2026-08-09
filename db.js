@@ -3,6 +3,10 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import dns from 'dns';
+
+// Force IPv4 first to prevent ENETUNREACH errors on Render/Supabase
+dns.setDefaultResultOrder('ipv4first');
 
 dotenv.config();
 
