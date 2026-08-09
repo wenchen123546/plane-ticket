@@ -509,7 +509,7 @@
   border: 1px solid var(--glass-border);
   border-radius: 4px; /* Techy corners */
   position: relative;
-  overflow: hidden;
+  /* Removed overflow: hidden so absolutely positioned badges can show outside the card */
 }
 
 .flight-card::before {
@@ -520,6 +520,7 @@
   height: 100%;
   background: transparent;
   transition: all 0.3s ease;
+  border-radius: 4px 0 0 4px; /* Matches the card corner */
 }
 
 .flight-card:hover {
